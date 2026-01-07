@@ -5,7 +5,7 @@ import Order from "../models/order";
 import User from "../models/user";
 
 const STRIPE = new Stripe(process.env.STRIPE_API_KEY as string);
-const FRONTEND_URL = process.env.FRONTEND_URL as string;
+//const FRONTEND_URL = process.env.FRONTEND_URL as string;
 
 type CheckoutSessionRequest = {
   cartItems: {
@@ -129,6 +129,12 @@ const createSession = async (
   deliveryPrice: number,
   restaurantId: string
 ) => {
+  const FRONTEND_URL = process.env.FRONTEND_URL;
+  console.log("-----------------------------------------");
+  console.log("🔥 STRIPE SESSION CREATED");
+  console.log("🔥 FRONTEND_URL is set to:", FRONTEND_URL);
+  console.log("-----------------------------------------");
+
   const sessionData = await STRIPE.checkout.sessions.create({
     line_items: lineItems,
     shipping_options: [
